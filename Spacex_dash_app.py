@@ -1,9 +1,8 @@
-# Import required libraries
 import pandas as pd
 import dash
-# import dash_html_components as html  # deprecated
+import dash_html_components as html  
 from dash import html
-# import dash_core_components as dcc  # deprecated
+import dash_core_components as dcc 
 from dash import dcc
 from dash.dependencies import Input, Output
 import plotly.express as px
@@ -65,7 +64,7 @@ app.layout = html.Div(children=[
 @app.callback(Output(component_id='success-pie-chart', component_property='figure'),
               Input(component_id='site-dropdown', component_property='value'))
 def get_pie_chart(entered_site):
-    filtered_df = spacex_df.groupby(['Launch Site'], as_index=False).mean()
+    filtered_df = spacex_df
     if entered_site == 'ALL':
         return px.pie(filtered_df, values='class', names='Launch Site', title='Launch Success Rate For All Sites')
     # return the outcomes in pie chart for a selected site
@@ -103,12 +102,3 @@ def get_scatter_chart(entered_site, slider):
 if __name__ == '__main__':
     app.run_server()
 
-# Finding Insights Visually
-# Now with the dashboard completed, you should be able to use it to analyze SpaceX launch data, and answer the following questions:
-#
-# Which site has the largest successful launches? KSC LC-39A
-# Which site has the highest launch success rate? KSC LC-39A (success rate 76.9%)
-# Which payload range(s) has the highest launch success rate? 2000-4000
-# Which payload range(s) has the lowest launch success rate? 6000-8000
-# Which F9 Booster version (v1.0, v1.1, FT, B4, B5, etc.) has the highest
-# launch success rate? B5 (only one successful start), apart from that FT (15 successes, 8 failures)
